@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8">
+  <title>Whack-a-mole</title>
+  <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+  <div id="nav-bar">
+    <nav class="nav-links nav-title" onclick="toggleView('dashboard')">WHACK A MOLE!</nav>
+    <nav class="nav-links" onclick="toggleView('hall-of-fame')">HALL OF FAME</nav>
+    <nav class="nav-links"  onclick="toggleView('about')">ABOUT</nav>
+  </div>
+
+  <div id="shell">
+    <div id="player-game-stats">
+      <ul id="player-details">
+        <li>Player Name: <span class="current-player"></span></li>
+        <li>Game Number: <span id="game-number">0</span></li>
+      </ul>
+      <ul id="game-details">
+        <li>Player score: <span id="score">0</span></li>
+        <li>Seconds left: <span id="time-left">0</span></li>
+      </ul>
+    </div>
+
+    <div class="tabcontent" id="dashboard">
+      <div id="controls">
+        <p id="player">Welcome <span class="current-player"></span></p>
+        <button class="start-game" onclick="toggleView('active-game')">START NEW GAME</button>
+        <button id="change-player">CHANGE PLAYER</button>
+        <!-- <form id="new-player-form" action="" method="get"> -->
+          <input class="new-player hide" type="text" id="inputName" name="name" placeholder="New Player">
+          <input type="submit" class="new-player hide" id="submit-player" value="SWITCH PLAYER" />
+        <!-- </form> -->
+      </div>
+    </div>
+
+    <div class="tabcontent" id="active-game">
+      <div class="grid" id="mallet">
+        <div class="square" id="1"></div>
+        <div class="square" id="2"></div>
+        <div class="square" id="3"></div>
+        <div class="square" id="4"></div>
+        <div class="square" id="5"></div>
+        <div class="square" id="6"></div>
+        <div class="square" id="7"></div>
+        <div class="square" id="8"></div>
+        <div class="square" id="9"></div>
+        <div class="square" id="10"></div>
+        <div class="square" id="11"></div>
+        <div class="square" id="12"></div>
+        <div class="square" id="13"></div>
+        <div class="square" id="14"></div>
+        <div class="square" id="15"></div>
+        <div class="square" id="16"></div>
+      </div>
+      <button id="end-game">END GAME</button>
+    </div>
+
+    <div class="tabcontent" id="hall-of-fame">
+      <ol>
+        <li><span id="high-score-1">High Score High Score High Score</span></li>
+        <li><span id="high-score-2">High Score High Score High Score</span></li>
+        <li><span id="high-score-3">High Score High Score High Score</span></li>
+        <li><span id="high-score-4">High Score High Score High Score</span></li>
+        <li><span id="high-score-5">High Score High Score High Score</span></li>
+      </ol>
+    </div>
+
+    <div class="tabcontent" id="about">
+      <p> Game Design by Anne Thorsteinson </p>
+      <ul id="details">
+        <li><a href="https://annethor.github.io" target="blank">Github Portfolio</a></li>
+        <li><a href="https://linkedin.com/in/annethor" target="blank">LinkedIn</a></li>
+        <li>Coding Student, Seattle, WA</li>
+      </ul>
+      <img src="./images/Anne.jpg"
+           alt="headshot of Anne"
+           id="headshot"></img>
+    </div>
+
+    <div class="tabcontent" id="game-over">
+      <p>Game Over! Final Score: <span id="final-score"></span></p>
+      <p><span id="final-player"></span>, would you like to:</p>
+      <div id="player-options">
+        <button class="start-game" onclick="toggleView('active-game')">Play Again</button>
+        <button id="return-home" onclick="toggleView('dashboard')">Return Home</button>
+      </div>
+    </div>
+
+</div>
+
+  <footer id="footer">
+    <div id="credits">
+      <p>Background Image: Kellie Churchman</p>
+      <p>Mole courtesy of <a href="www.clipartmax.com">ClipArtMax</a></p>
+      <p>Ouch sound effect by sventhors via <a href="www.freesound.org">freesound.org</a></p>
+    </div>
+  </footer>
+
+</body>
+
+
+
+<script src="app.js" charset="utf-8"></script>
+</html>
