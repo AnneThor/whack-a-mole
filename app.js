@@ -163,7 +163,7 @@ function toggleView(activeView) {
   if (activeView === "game-over") {
     score.textContent = 0;
     document.getElementById("final-score").textContent = localStorage.getItem("result");
-    document.getElementById("final-player").textContent = localStorage.getItem("current-player");
+    document.getElementById("final-player").textContent = localStorage.getItem("current-player") ? localStorage.getItem("current-player") : "Guest";
   }
   if (activeView === "active-game") {
     newGame();
