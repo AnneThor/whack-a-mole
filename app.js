@@ -19,16 +19,6 @@ let gameNumberDisplay = document.querySelector("#game-number");
 let gameNumber = localStorage.getItem("gameNumber") ? localStorage.getItem("gameStorage") : 0;
 gameNumberDisplay = gameNumber;
 
-//Improvements needed:
-// Quicken pace of mole throughout game, add alerts to speed changes
-// Store number of games played in local storage; increment on start game; reset on new player
-// Improve gameboard appearance
-// Reformat project into more advanced MVC structure
-// Make display responsive
-// Adding some implementation of async features
-// Refactor/reorganize code
-
-
 let result = 0;
 let currentTime = 0;
 let speed = 1000;
@@ -75,31 +65,9 @@ function newGame() {
 
 function endGame() {
   localStorage.setItem("result", result);
-  console.log("inside endgame final score is", result);
-  console.log("from local storage is", localStorage.getItem("result"));
   result = 0;
   clearInterval(timerID);
-  console.log("inside endgame, cleared timerId");
-  console.log("inside endgame, cleared result, now is", result);
 }
-
-
-// //things that need to happen after game runs
-// function clearGame() {
-//   console.log("entered clear game");
-//   result = 0;
-//   score.textContent = result;
-// }
-
-// function countDown() {
-//     currentTime--;
-//     timeLeft.textContent = currentTime;
-//     if (currentTime < 0) {
-//       clearInterval(timerID);
-//       alert("Game Over! Your final score is " + result);
-//       }
-//     localStorage.setItem("result", result);
-// }
 
 function countDown() {
   currentTime--;
@@ -143,7 +111,6 @@ function checkHighScore(score) {
 
 //display of the highScores in the hall of fame
 function createHallOfFame() {
-  console.log("inside create hall of fame");
   const hallOfFame = JSON.parse(localStorage.getItem("highScores") || "[]");
   hallOfFame.sort( (a,b) => {
     return b.value-a.value;
@@ -195,7 +162,6 @@ function toggleView(activeView) {
   }
   if (activeView === "game-over") {
     score.textContent = 0;
-    console.log("inside toggle view testing cleared result", result);
     document.getElementById("final-score").textContent = localStorage.getItem("result");
     document.getElementById("final-player").textContent = localStorage.getItem("current-player");
   }
