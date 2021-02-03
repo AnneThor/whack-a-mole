@@ -6,7 +6,6 @@ body {
   back-ground-color: rgba(185, 240, 190, .6);
 }
 
-
 #nav-bar {
   top: 0;
   left: 0;
@@ -76,8 +75,9 @@ body {
   flex-flow: row wrap;
   justify-content: space-around;
   align-content: space-between;
-  padding: 60px 10px 40px 10px;
-  height: 100%;
+  /* padding: 60px 10px 40px 10px; */
+  padding: 0 0 ;
+  height: 60%;
   width: 75vw;
 }
 
@@ -219,4 +219,63 @@ body {
   float: right;
   margin-right: 10%;
   border-radius: 20px;
+}
+
+.tabcontent {
+  height: 60vh;
+  width: 80vw;
+}
+
+/* break for mobile devices 
+app is responsive up to this point  */
+@media screen and (max-width: 700px) {
+  #nav-bar {
+    display: block;
+  }
+
+  .nav-title {
+    font-size: 1em;
+  }
+
+  .nav-links {
+    text-align: center;
+  }
+
+  #player-game-stats {
+    max-height: 15%;
+    height: 15%;
+  }
+
+  #active-game {
+    margin-top: 3%;
+    height: 50vh;
+    max-height: 50vh;
+  }
+
+  .square {
+    width: 25%;
+    height: 25%;
+  }
+
+  #player-details, #game-details {
+    margin: 0 0;
+    padding: 0 0;
+  }
+
+  #hall-of-fame {
+    font-size: 1.5em;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+  }
+
+  #headshot {
+    display: none;
+  }
+
+  #shell {
+    margin-left: 2%;
+    margin-right: 2%;
+  }
+
 }

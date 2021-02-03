@@ -1,4 +1,25 @@
+//main routing function, toggles display between parts of game based on user interaction
+function toggleView(activeView) {
+  views = document.querySelectorAll(".tabcontent");
+  views.forEach( view => view.classList.contains("hide") ? "" : view.classList.add("hide"));
+  document.getElementById(activeView).classList.toggle("hide");
+  switch (activeView){
+    case "hall-of-fame":
+      createHallOfFame();
+      break;
+    case "game-over":
+      score.textContent = 0;
+      document.getElementById("final-score").textContent = localStorage.getItem("result");
+      document.getElementById("final-player").textContent = localStorage.getItem("current-player") ? localStorage.getItem("current-player") : "Guest";
+      break;
+    case "active-game":
+      newGame();
+      break;
+  }
+}
+
 document.addEventListener("DOMContentLoaded", () => {
+  //on page load start the game on the dashboard and make sure content pulls into hall of fame
   toggleView("dashboard");
   createHallOfFame();
 });
@@ -6,19 +27,19 @@ document.addEventListener("DOMContentLoaded", () => {
 
 const currentPlayer = document.querySelectorAll(".current-player");
 currentPlayer.forEach( player => {
-  player.innerHTML = localStorage.getItem("current-player") ? localStorage.getItem("current-player") : "Guest";
+  player.textContent = localStorage.getItem("current-player") ? localStorage.getItem("current-player") : "Guest";
 })
 
 const square = document.querySelectorAll(".square");
 const mole = document.querySelectorAll(".mole");
 const timeLeft = document.querySelector("#time-left");
 let score = document.querySelector("#score");
-let gameNumberDisplay = document.querySelector("#game-number");
+let gameNumberDisplay = document.getElementById("game-number");
 
 //setting up implementing game number increment
-let gameNumber = localStorage.getItem("gameNumber") ? localStorage.getItem("gameStorage") : 0;
-gameNumberDisplay = gameNumber;
+gameNumberDisplay.textContent = localStorage.getItem("gameNumber") ? localStorage.getItem("gameNumber") : 0;
 
+let gameNumber = 0;
 let result = 0;
 let currentTime = 0;
 let speed = 1000;
@@ -30,8 +51,8 @@ function randomSquare() {
   square.forEach(className => {
     className.classList.remove("mole")
   })
-  //then add the mole at a random position
-  let randomPosition = square[Math.floor(Math.random()*9)];
+  //add the mole at a random position
+  let randomPosition = square[Math.floor(Math.random()*16)];
   randomPosition.classList.add("mole");
   //assign the id of the random position to the hit position for us to use later
   hitPosition = randomPosition.id;
@@ -56,7 +77,9 @@ function runGame() {
 }
 
 function newGame() {
-  currentTime = 6;
+  localStorage.setItem("gameNumber", Number(gameNumber)+1);
+  gameNumberDisplay.textContent = localStorage.getItem("gameNumber");
+  currentTime = 60;
   result = 0;
   score.textContent=0;
   timerID = setInterval(runGame, 1000);
@@ -68,6 +91,7 @@ function endGame() {
   result = 0;
   clearInterval(timerID);
 }
+
 
 function countDown() {
   currentTime--;
@@ -139,8 +163,11 @@ submitPlayerButton.addEventListener("click", () => {
   if (newPlayer === "") { newPlayer = "Guest"};
   localStorage.setItem("current-player", newPlayer);
   currentPlayer.forEach( player => {
-    player.innerHTML = localStorage.getItem("current-player");
+    // player.innerHTML = localStorage.getItem("current-player");
+    player.textContent = localStorage.getItem("current-player");
   })
+  localStorage.setItem("gameNumber", "0");
+  document.getElementById("game-number").textContent = localStorage.getItem("gameNumber");
   document.getElementById("inputName").value = null;
   nameInputs.forEach(item => {
     item.classList.toggle("hide");
@@ -152,20 +179,3 @@ endButton.addEventListener("click", () => {
   endGame();
   toggleView('game-over');
 })
-
-function toggleView(activeView) {
-  views = document.querySelectorAll(".tabcontent");
-  views.forEach( view => view.classList.contains("hide") ? "" : view.classList.add("hide"));
-  document.getElementById(activeView).classList.toggle("hide");
-  if (activeView === "hall-of-fame") {
-    createHallOfFame();
-  }
-  if (activeView === "game-over") {
-    score.textContent = 0;
-    document.getElementById("final-score").textContent = localStorage.getItem("result");
-    document.getElementById("final-player").textContent = localStorage.getItem("current-player") ? localStorage.getItem("current-player") : "Guest";
-  }
-  if (activeView === "active-game") {
-    newGame();
-  }
-}
